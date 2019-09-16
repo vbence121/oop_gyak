@@ -21,7 +21,10 @@
     <ClCompile Include="haromsz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="feksim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hofok.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
