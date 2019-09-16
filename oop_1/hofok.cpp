@@ -36,6 +36,15 @@ void print(TemperatureChain*& chain) {
 	}
 }
 
+bool checkTempreture(TemperatureChain*& chain) {
+	TemperatureElement* elem = chain->first;
+	while (elem->next != NULL) {
+		if (!temperatureComfortable(*elem)) {
+
+		}
+	}
+}
+
 void appendlast(TemperatureChain*& chain, const double temp, const double humidity) {
 	TemperatureElement* elem = new TemperatureElement();
 	elem->next = NULL;
