@@ -18,6 +18,9 @@
     <ClCompile Include="kamat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="haromsz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

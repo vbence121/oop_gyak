@@ -2,33 +2,57 @@
 #include <fstream>
 using namespace std;
 
-struct harom {
-	double a, b, c, t, s;
+struct kocsi {
+	double sebesseg=0, mass, acl;
 };
 
-double heron(const harom& k) {
-	return sqrt(k.s*(k.s - k.a)*(k.s - k.b)*(k.s - k.c));
+struct sim {
+	kocsi k;
+	double steps, tfinal, dt;
+};
+
+double vlaszlo(const kocsi k, double ml) {
+	return sqrt((k.mass*pow(k.sebesseg, 2)) / ml);
 }
+
+double fektav(const double v, const double u, const double g) {
+	return pow(v, 2) / (2 * u*g);
+}
+
 
 int main() {
 
-	ifstream fin;
-	fin.open("be2.txt");
-	while (!fin.eof()) {
-		harom k;
+	const double g = 9.81, u = 0.6;
+	double ml=80;
+	//kocsi k;
+	/*cout << "Adja meg a kocsi es Laszlo sulyat kg-ban\n";
+	cin >> k.mass >> ml;
+	k.sebesseg = 0;
 
-		//cout << "Adja meg az oldalak nagysagat cm-ben\n";
-		fin >> k.a >> k.b >> k.c;
+	cout << "Adja meg a kocsi gyorsulasat\n";
+	cin >> k.acl;
 
-		if (((k.a + k.b) > k.c) && ((k.a + k.c) > k.b) && ((k.c + k.b) > k.a)) {
-			k.s = (k.a + k.b + k.c) / 2;
-			k.t = heron(k);
+	double steps = 100, tfinal = 10;
+	*/
 
-			cout << "A(z) ("<<k.a<<","<<k.b<<","<<k.c<<") haromszog terulete " << k.t << endl;
+	ifstream be;
+	be.open("be3.txt");
+
+	while (!be.eof()) {
+		sim s;
+		be >> s.k.acl >> s.k.mass >> s.tfinal >> s.steps;
+		s.dt = s.tfinal / s.steps;
+		for (int i = 0; i < s.steps; i++) {
+			s.k.sebesseg += s.k.acl * s.dt;
+			cout << "A " << i << ". iteracioban a kocsi jelenlegi sebessege" << s.k.sebesseg << endl;
+			double vl = vlaszlo(s.k, ml);
+			cout << "Laszlo az adott pilanatban " << vl << " sebessegel repulne\n";
 		}
-		else cout << "A(z) (" << k.a << "," << k.b << "," << k.c << ") haromszog nem letezik\n";
+
+		double d = fektav(s.k.sebesseg, u, g);
+		cout << "A fektav: " << d << "m.\n";
 	}
-	
+
 	int temp;
 	cin >> temp;
 	cout << temp;
